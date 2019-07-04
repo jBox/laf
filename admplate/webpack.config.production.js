@@ -26,7 +26,17 @@ module.exports = {
         rules: [{
             test: /\.js$/i,
             exclude: /(node_modules|bower_components)/,
-            loader: "babel-loader"
+            use: {
+                loader: "babel-loader",
+                options: {
+                    babelrc: false,
+                    plugins: ["@babel/plugin-proposal-class-properties"],
+                    presets: [
+                        "@babel/preset-env",
+                        "@babel/preset-react"
+                    ]
+                }
+            }
         },
         {
             test: /\.css$/,
@@ -36,10 +46,8 @@ module.exports = {
             {
                 loader: "css-loader",
                 options: {
-                    modules: {
-                        mode: "local",
-                        localIdentName: config.css
-                    }
+                    modules: true,
+                    localIdentName: config.css
                 }
             },
                 "postcss-loader",

@@ -7,7 +7,7 @@
     "scripts": {
         "clean:dist": "del-cli static/dist/** && del-cli lib/**",
         "build": "npm run clean:dist && webpack --config webpack.config.production.js",
-        "dev": "npm run clean:dist && webpack",
+        "dev": "npm run clean:dist && webpack && babel src -d lib",
         "dev:watch": "npm run clean:dist && webpack --watch",
         "start": "nodemon --watch src --watch app server",
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -64,7 +64,7 @@
         "autoprefixer": "^9.6.0",
         "babel-loader": "^8.0.6",
         "babel-plugin-css-modules-transform": "^1.6.2",
-        "css-loader": "^3.0.0",
+        "css-loader": "^1.0.1",
         "del-cli": "^2.0.0",
         "mini-css-extract-plugin": "^0.7.0",
         "nodemon": "^1.19.1",

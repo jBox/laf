@@ -43,10 +43,8 @@ module.exports = {
             {
                 loader: "css-loader",
                 options: {
-                    modules: {
-                        mode: "local",
-                        localIdentName: config.css
-                    }
+                    modules: true,
+                    localIdentName: config.css
                 }
             },
                 "postcss-loader",
