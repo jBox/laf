@@ -24,27 +24,27 @@ module.exports = {
 
     module: {
         rules: [{
-                test: /\.js$/i,
-                exclude: /node_modules/,
-                loader: "babel-loader"
+            test: /\.js$/i,
+            exclude: /(node_modules|bower_components)/,
+            loader: "babel-loader"
+        },
+        {
+            test: /\.css$/,
+            use: [{
+                loader: MiniCssExtractPlugin.loader
             },
             {
-                test: /\.css$/,
-                use: [{
-                        loader: MiniCssExtractPlugin.loader
-                    },
-                    {
-                        loader: "css-loader",
-                        options: {
-                            modules: {
-                                mode: "local",
-                                localIdentName: config.css
-                            }
-                        }
-                    },
-                    "postcss-loader",
-                ],
+                loader: "css-loader",
+                options: {
+                    modules: {
+                        mode: "local",
+                        localIdentName: config.css
+                    }
+                }
             },
+                "postcss-loader",
+            ],
+        },
         ],
     },
 
