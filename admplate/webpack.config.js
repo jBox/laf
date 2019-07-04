@@ -21,27 +21,37 @@ module.exports = {
 
     module: {
         rules: [{
-                test: /\.js$/i,
-                exclude: /(node_modules|bower_components)/,
-                loader: "babel-loader"
+            test: /\.js$/i,
+            exclude: /(node_modules|bower_components)/,
+            use: {
+                loader: "babel-loader",
+                options: {
+                    babelrc: false,
+                    plugins: ["@babel/plugin-proposal-class-properties"],
+                    presets: [
+                        "@babel/preset-env",
+                        "@babel/preset-react"
+                    ]
+                }
+            }
+        },
+        {
+            test: /\.css$/,
+            use: [{
+                loader: MiniCssExtractPlugin.loader
             },
             {
-                test: /\.css$/,
-                use: [{
-                        loader: MiniCssExtractPlugin.loader
-                    },
-                    {
-                        loader: "css-loader",
-                        options: {
-                            modules: {
-                                mode: "local",
-                                localIdentName: config.css
-                            }
-                        }
-                    },
-                    "postcss-loader",
-                ],
+                loader: "css-loader",
+                options: {
+                    modules: {
+                        mode: "local",
+                        localIdentName: config.css
+                    }
+                }
             },
+                "postcss-loader",
+            ],
+        },
         ],
     },
 

@@ -5,7 +5,7 @@
     "description": "Admin template",
     "main": "server.js",
     "scripts": {
-        "clean:dist": "del-cli static/dist/**",
+        "clean:dist": "del-cli static/dist/** && del-cli lib/**",
         "build": "npm run clean:dist && webpack --config webpack.config.production.js",
         "dev": "npm run clean:dist && webpack",
         "dev:watch": "npm run clean:dist && webpack --watch",
@@ -63,6 +63,7 @@
         "@babel/preset-react": "^7.0.0",
         "autoprefixer": "^9.6.0",
         "babel-loader": "^8.0.6",
+        "babel-plugin-css-modules-transform": "^1.6.2",
         "css-loader": "^3.0.0",
         "del-cli": "^2.0.0",
         "mini-css-extract-plugin": "^0.7.0",

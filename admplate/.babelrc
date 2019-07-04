@@ -1,6 +1,13 @@
 {
     "plugins": [
-        "@babel/plugin-proposal-class-properties"
+        "@babel/plugin-proposal-class-properties",
+        [
+            "css-modules-transform",
+            {
+                "mode": "local",
+                "generateScopedName": "[name]_[local]__[path:base64:5]"
+            }
+        ]
     ],
     "presets": [
         "@babel/preset-env",
