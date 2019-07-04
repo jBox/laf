@@ -1,12 +1,18 @@
 import "./dateFormat";
 import React from "react";
 import Layout from "./layouts/Layout";
+import Home from "./containers/Home";
 
 const routes = [{
-    id: "page-top",
+    id: "wrapper",
     routes: [{
         path: "/",
-        component: Layout
+        component: Layout,
+        routes:[{
+            path:"/",
+            exact: true,
+            component: Home
+        }]
     }]
 }];
 

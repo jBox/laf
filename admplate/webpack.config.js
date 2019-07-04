@@ -20,16 +20,14 @@ module.exports = {
     },
 
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.js$/i,
                 exclude: /node_modules/,
                 loader: "babel-loader"
             },
             {
                 test: /\.css$/,
-                use: [
-                    {
+                use: [{
                         loader: MiniCssExtractPlugin.loader
                     },
                     {
