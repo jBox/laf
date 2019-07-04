@@ -1,0 +1,9 @@
+@value success from "../Colors.css";
+
+.captchaButton {
+    min-width: 140px;
+}
+.verifiedIcon {
+    color: success !important;
+    right: 140px;
+}

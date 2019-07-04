@@ -1,0 +1,11 @@
+{
+    "name": "laf",
+    "private": true,
+    "scripts": {
+        "clean": "git clean -fdX .",
+        "start": "node ./scripts/start.js"
+    },
+    "devDependencies": {
+        "lerna": "3.15.0"
+    }
+}

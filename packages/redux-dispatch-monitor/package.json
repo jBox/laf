@@ -1,0 +1,51 @@
+{
+  "name": "redux-dispatch-monitor",
+  "version": "5.0.0",
+  "description": "Initialize redux state asynchronously with multiple async actions.",
+  "main": "lib/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "mocha": "3.4.2",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
+  },
+  "peerDependencies": {
+    "redux": "^4.0.0"
+  },
+  "scripts": {
+    "build": "babel index.js --out-dir lib",
+    "test": "npm run build && mocha -t 60000",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jBox/redux-dispatch-monitor.git"
+  },
+  "keywords": [
+    "initial",
+    "preload",
+    "redux",
+    "state"
+  ],
+  "author": "jBox",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jBox/redux-dispatch-monitor/issues"
+  },
+  "homepage": "https://github.com/jBox/redux-dispatch-monitor#readme",
+  "files": [
+    "lib"
+  ],
+  "babel": {
+    "presets": [
+      "env",
+      "stage-2"
+    ]
+  }
+}

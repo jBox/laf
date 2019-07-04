@@ -1,0 +1,34 @@
+.list :global(.form-group) {
+    margin-bottom: 0;
+}
+
+.list :global(input.form-control) {
+    height: 24px;
+    padding: 0;
+}
+
+.nicknameCol {
+    width: 30%;
+}
+
+.titleCol {
+    width: 30%;
+}
+
+.mobileCol {
+    width: 40%;
+}
+
+.driverTools {}
+
+.driverTools button {
+    margin-left: 20px;
+}
+
+.driverTools .buttonGroup {
+    margin-left: 20px;
+}
+
+.driverTools .buttonGroup button {
+    margin-left: 5px;
+}

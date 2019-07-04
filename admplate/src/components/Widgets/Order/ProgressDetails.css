@@ -1,0 +1,42 @@
+.progressList {
+    width: 100%;
+}
+
+:global(.timeline:before) {
+    left: 15px;
+}
+
+:global(.timeline>li>.fa),
+:global(.timeline>li>.glyphicon),
+:global(.timeline>li>.ion) {
+    left: 2px;
+}
+
+:global(.timeline>li>.timeline-item) {
+    margin-left: 42px;
+    margin-right: 0;
+}
+
+.zebra {
+    background-color: #ecf0f5;
+}
+
+.notes {
+    padding: 0 10px 10px 10px;
+    color: #999;
+    font-size: 12px;
+}
+
+.thumbnails {
+    padding: 0 10px 10px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.thumbnails>div {
+    width: 100%;
+}
+
+.thumbnails>div:not(:last-child) {
+    margin-right: 3px;
+}
