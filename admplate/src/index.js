@@ -1,4 +1,6 @@
-import "babel-polyfill";
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+
 import routes from "./routes";
 import middleware from "./redux/middleware";
 import reducers from "./redux/reducers";

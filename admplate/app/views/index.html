@@ -18,7 +18,8 @@
     <!-- Custom styles for this template-->
     <link href="/static/sb-admin-2/css/sb-admin-2.min.css" rel="stylesheet">
 
-    <link href="/static/dist/main.css" rel="stylesheet">
+    <!-- main styles for this template-->
+    <link href="/static/dist/{{main.css}}" rel="stylesheet">
 
 </head>
 
@@ -61,6 +62,12 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/static/sb-admin-2/js/sb-admin-2.min.js"></script>
+
+    <!-- vendor scripts for all pages-->
+    <script src="/static/dist/{{vendor.js}}"></script>
+
+    <!-- main scripts for all pages-->
+    <script src="/static/dist/{{main.js}}"></script>
 
 </body>
 

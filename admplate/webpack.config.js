@@ -10,7 +10,11 @@ const devMode = process.env.NODE_ENV === "development";
 module.exports = {
     mode: devMode ? "development" : "production",
 
-    entry: { main: Path.resolve("src/index.js") },
+    entry: [
+        "core-js/stable",
+        "regenerator-runtime/runtime",
+        Path.resolve("src/index.js")
+    ],
 
     devtool: "source-map",
 

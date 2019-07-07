@@ -5,11 +5,16 @@ const Path = require("path");
 const ManifestPlugin = require("webpack-manifest-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
     mode: "production",
-
-    entry: { main: Path.resolve("src/index.js") },
+    
+    entry: [
+        "core-js/stable",
+        "regenerator-runtime/runtime",
+        Path.resolve("src/index.js")
+    ],
 
     output: {
         filename: "[name].[chunkhash].js",
@@ -55,7 +60,7 @@ module.exports = {
     },
 
     optimization: {
-        minimizer: [new OptimizeCSSAssetsPlugin({})],
+        minimizer: [new UglifyJsPlugin(), new OptimizeCSSAssetsPlugin({})],
         splitChunks: {
             chunks: "all",
             cacheGroups: {
