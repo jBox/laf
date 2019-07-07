@@ -25,35 +25,35 @@ module.exports = {
 
     module: {
         rules: [{
-            test: /\.js$/i,
-            exclude: /(node_modules|bower_components)/,
-            use: {
-                loader: "babel-loader",
-                options: {
-                    babelrc: false,
-                    plugins: ["@babel/plugin-proposal-class-properties"],
-                    presets: [
-                        "@babel/preset-env",
-                        "@babel/preset-react"
-                    ]
+                test: /\.js$/i,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        babelrc: false,
+                        plugins: ["@babel/plugin-proposal-class-properties"],
+                        presets: [
+                            "@babel/preset-env",
+                            "@babel/preset-react"
+                        ]
+                    }
                 }
-            }
-        },
-        {
-            test: /\.css$/,
-            use: [{
-                loader: MiniCssExtractPlugin.loader
             },
             {
-                loader: "css-loader",
-                options: {
-                    modules: true,
-                    localIdentName: "[name]_[local]__[hash:base64:5]"
-                }
+                test: /\.css$/,
+                use: [{
+                        loader: MiniCssExtractPlugin.loader
+                    },
+                    {
+                        loader: "css-loader",
+                        options: {
+                            modules: true,
+                            localIdentName: "[name]_[local]__[hash:base64:5]"
+                        }
+                    },
+                    "postcss-loader",
+                ],
             },
-                "postcss-loader",
-            ],
-        },
         ],
     },
 
