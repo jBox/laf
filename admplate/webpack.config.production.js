@@ -6,8 +6,6 @@ const ManifestPlugin = require("webpack-manifest-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
-const config = require("./package").config;
-
 module.exports = {
     mode: "production",
 
@@ -47,7 +45,7 @@ module.exports = {
                 loader: "css-loader",
                 options: {
                     modules: true,
-                    localIdentName: config.css
+                    localIdentName: "[name]_[local]__[hash:base64:5]"
                 }
             },
                 "postcss-loader",

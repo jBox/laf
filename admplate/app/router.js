@@ -1,22 +1,12 @@
 "use strict";
 
-const babel = require("@babel/register");
-babel({
-    only: [/src/],
-});
-
-// teaches node.js to load css files
-require("css-modules-require-hook/preset");
-
-const requireDefault = (esModule) => {
-    return esModule.default || esModule;
-};
+const requireDefault = (obj) => obj && obj.__esModule ? obj.default: obj;
 
 const Path = require("path");
 const chaos = requireDefault(require("chaos-magician"));
-const routes = requireDefault(require("../src/routes"));
-const middlewares = requireDefault(require("../src/redux/middleware"));
-const reducers = requireDefault(require("../src/redux/reducers"));
+const routes = requireDefault(require("../lib/routes"));
+const middlewares = requireDefault(require("../lib/redux/middleware"));
+const reducers = requireDefault(require("../lib/redux/reducers"));
 
 const express = require("express");
 const router = express.Router();

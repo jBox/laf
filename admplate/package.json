@@ -5,19 +5,16 @@
     "description": "Admin template",
     "main": "server.js",
     "scripts": {
-        "clean:dist": "del-cli static/dist/** && del-cli lib/**",
-        "build": "npm run clean:dist && webpack --config webpack.config.production.js",
-        "dev": "npm run clean:dist && webpack && babel src -d lib",
-        "dev:watch": "npm run clean:dist && webpack --watch",
+        "clean:dist": "del-cli static/dist/**",
+        "clean:lib": "del-cli lib/**",
+        "clean": "npm run clean:dist && npm run clean:lib",
+        "build": "npm run clean && webpack --config webpack.config.production.js && babel src -d lib",
+        "dev": "npm run clean && webpack && babel src -d lib",
+        "dist:watch": "npm run clean:dist && webpack --watch",
+        "lib:watch": "npm run clean:lib && babel src -d lib -sw",
         "start": "nodemon --watch src --watch app server",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "config": {
-        "css": "[name]_[local]__[hash:base64:5]"
-    },
-    "keywords": [
-        "css-modules"
-    ],
     "author": "jBox",
     "dependencies": {
         "@babel/register": "^7.4.4",
@@ -68,6 +65,7 @@
         "del-cli": "^2.0.0",
         "mini-css-extract-plugin": "^0.7.0",
         "nodemon": "^1.19.1",
+        "open-browser-webpack-plugin": "0.0.5",
         "optimize-css-assets-webpack-plugin": "^5.0.3",
         "postcss-font-magician": "^2.2.2",
         "postcss-loader": "^3.0.0",

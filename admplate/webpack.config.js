@@ -3,8 +3,8 @@
 const webpack = require("webpack");
 const Path = require("path");
 
+const OpenBrowserPlugin = require("open-browser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const config = require("./package").config;
 const devMode = process.env.NODE_ENV === "development";
 
 module.exports = {
@@ -44,7 +44,7 @@ module.exports = {
                 loader: "css-loader",
                 options: {
                     modules: true,
-                    localIdentName: config.css
+                    localIdentName: "[name]_[local]__[hash:base64:5]"
                 }
             },
                 "postcss-loader",
@@ -81,6 +81,8 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery",
-        })
+        }),
+
+        new OpenBrowserPlugin({ url: "http://localhost:3799" })
     ]
 };
