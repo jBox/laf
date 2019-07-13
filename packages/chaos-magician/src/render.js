@@ -81,7 +81,7 @@ export default (routes, rootReducer, middlewares) => {
             return actions;
         }, []);
 
-        const renderComponentsToString = (routes, options, callback) => {
+        const renderComponentsToString = (routes, options) => {
             const components = {};
             for (const route of routes) {
                 const id = route.id;
@@ -94,33 +94,29 @@ export default (routes, rootReducer, middlewares) => {
                 }
             }
 
-            callback({
+            return {
                 components,
                 initials: setInitials(options.store.getState())
-            });
+            };
         };
 
-        const done = (callback) => {
-            const monitor = createMonitor();
-            createReduxStore(request, rootReducer, middlewares, monitor);
-            return monitor.dispatch(...initialActions).done((initialState) => {
-                const store = createReduxStore(
-                    request,
-                    rootReducer,
-                    middlewares,
-                    monitor,
-                    { ...initialState, ...preloadedState });
-                renderComponentsToString(routes, {
-                    url,
-                    request,
-                    routerContext,
-                    monitor,
-                    store
-                }, callback);
+        const monitor = createMonitor();
+        createReduxStore(request, rootReducer, middlewares, monitor);
+        return monitor.dispatch(...initialActions).then((initialState) => {
+            const store = createReduxStore(
+                request,
+                rootReducer,
+                middlewares,
+                monitor,
+                { ...initialState, ...preloadedState });
+            return renderComponentsToString(routes, {
+                url,
+                request,
+                routerContext,
+                monitor,
+                store
             });
-        };
-
-        return { done }
+        });
     };
 
     return { render, serverRender }

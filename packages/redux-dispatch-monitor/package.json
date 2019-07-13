@@ -7,13 +7,12 @@
     "test": "test"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-2": "^6.24.1",
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
     "mocha": "3.4.2",
-    "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0"
   },
   "peerDependencies": {
     "redux": "^4.0.0"
@@ -44,8 +43,7 @@
   ],
   "babel": {
     "presets": [
-      "env",
-      "stage-2"
+      "@babel/preset-env"
     ]
   }
 }

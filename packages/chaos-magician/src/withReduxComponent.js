@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { createMonitor } from "redux-dispatch-monitor";
 import PropTypes from "prop-types";
 import { Provider } from "react-redux";
 

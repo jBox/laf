@@ -1,18 +1,24 @@
-if (typeof console === "undefined") {
+const TRY_CALL_SYMBOL = "[TRY_CALL]";
+const DIDISPATCH_ACTION_SYMBOL = "[DISPATCH_ACTION]";
+const DISPATCH_EXCEPTION_SYMBOL = "[DISPATCH_EXCEPTION]";
+
+const isUndefined = (obj) => typeof obj === "undefined";
+const isFunction = (fn) => fn && typeof fn === "function";
+const isPromise = (p) => (p && isFunction(p.then));
+
+if (isUndefined(console)) {
     console = {};
 }
-if (typeof console.error !== "function") {
+if (!isFunction(console.error)) {
     console.error = (error) => (error);
 }
 
-const isPromise = (p) => (p && typeof p.then === "function");
-
 const tryCall = (fn, ...args) => {
-    if (typeof fn === "function") {
+    if (isFunction(fn)) {
         try {
             return fn(...args);
         } catch (exception) {
-            console.error("[TRY_CALL]", exception);
+            console.error(TRY_CALL_SYMBOL, exception);
         }
     }
 
@@ -23,21 +29,20 @@ const INIT_ERROR = () => {
     throw new Error(`Compose monitor into Redux store first. e.g. 
 const monitor = createMonitor();
 const store = createStore(reducers, compose(monitor, applyMiddleware(...middlewares)));
-monitor.dispatch(...actions).done(fullFill);`);
+monitor.dispatch(...actions).then((preloadedState) => ());`);
 }
 
-const monitorPromise = (getState, tasks = []) => {
+const done = (getState, tasks = []) => {
     const p = tasks.length === 0 ?
         Promise.resolve() :
         Promise.all(tasks).then(() => Promise.resolve());
 
-    p.done = (fullFill) => p.then(() => tryCall(fullFill, getState()));
-    return p;
+    return p.then(() => getState());
 };
 
 export const createMonitor = () => {
-    const monitor = (createStore) => (reducer, preloadedState, enhancer) => {
-        const store = createStore(reducer, preloadedState, enhancer);
+    const monitor = (createStore) => (...args) => {
+        const store = createStore(...args);
         const { dispatch, getState } = store;
         monitor.dispatch = (...actions) => {
             const tasks = actions.reduce((res, action) => {
@@ -45,20 +50,20 @@ export const createMonitor = () => {
                     const result = dispatch(action);
                     if (isPromise(result)) {
                         res.push(result.catch((error) => {
-                            console.error("[DISPATCH_ACTION]", error);
+                            console.error(DIDISPATCH_ACTION_SYMBOL, error);
                             return Promise.resolve();
                         }));
                     } else {
                         res.push(Promise.resolve(result));
                     }
                 } catch (exception) {
-                    console.error("[DISPATCH_EXCEPTION]", exception)
+                    console.error(DISPATCH_EXCEPTION_SYMBOL, exception)
                 }
 
                 return res;
             }, []);
 
-            return monitorPromise(getState, tasks);
+            return done(getState, tasks);
         };
 
         return store;
