@@ -1,4 +1,50 @@
 import React from "react"
+import classNames from "classnames"
+
+const NavItem = ({ href, icon, label }) => {
+    href = href || "#"
+
+    const iconClassName = icon ? classNames("fas", "fa-fw", `fa-${icon}`) : null
+
+    return (
+        <li className="nav-item">
+            <a className="nav-link" href={href}>
+                {iconClassName && <i className={iconClassName}></i>}
+                <span>{label}</span>
+            </a>
+        </li>
+    )
+}
+
+const NavDivider = ({ className }) => (
+    <hr className={classNames("sidebar-divider", className)} />
+)
+
+const NavDeading = ({ children }) => (
+    <div className="sidebar-heading">{children}</div>
+)
+
+const NavGroup = ({ children }) => {
+    return (
+        <li className="nav-item">
+            <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <i className="fas fa-fw fa-cog"></i>
+                <span>Components</span>
+            </a>
+            <div id={id} className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div className="bg-white py-2 collapse-inner rounded">
+                    {children}
+                </div>
+            </div>
+        </li>
+    )
+}
+
+const NavGroupItem = ({ href, children }) => {
+    href = href || "#"
+
+    return (<a className="collapse-item" href={href}>{children}</a>)
+}
 
 export default () => {
     return (
@@ -10,17 +56,13 @@ export default () => {
                 <div className="sidebar-brand-text mx-3">Admplate</div>
             </a>
 
-            <hr className="sidebar-divider my-0" />
+            <NavDivider className="my-0" />
 
-            <li className="nav-item">
-                <a className="nav-link" href="index.html">
-                    <i className="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
+            <NavItem label="Dashboard" icon="tachometer-alt" />
 
-            <hr className="sidebar-divider" />
+            <NavDivider />
 
-            <div className="sidebar-heading">Interface</div>
+            <NavDeading>Interface</NavDeading>
 
             <li className="nav-item">
                 <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -52,7 +94,7 @@ export default () => {
                 </div>
             </li>
 
-            <hr className="sidebar-divider" />
+            <NavDivider />
 
             <div className="sidebar-heading">Addons</div>
 

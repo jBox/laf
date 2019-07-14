@@ -85,8 +85,6 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery",
-        }),
-
-        new OpenBrowserPlugin({ url: "http://localhost:3799" })
+        })
     ]
 };
