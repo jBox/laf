@@ -3,7 +3,7 @@ A Router wrapper for react-router, it allows you to create multiple Routers shar
 ## Install
 
 ```npm 
-npm install --save react-browser-router
+npm install --save react-router-ads
 ```
 
 ## Example
@@ -15,7 +15,7 @@ import {
     BrowserRouter, 
     Route, 
     Link
-} from "react-browser-router";
+} from "react-router-ads";
 import Home from "./components/Home";
 import About from "./components/About";
 import Nav from "./components/Nav";

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Route, Link } from "react-browser-router";
+import { Route, Link } from "react-router-ads";
 
 const NavItem = ({ to, exact, children }) => {
     const path = typeof to === "object" ? to.pathname : to;

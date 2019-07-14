@@ -1,6 +1,6 @@
 import React from "react"
 import classNames from "classnames"
-import { Route, Link } from "react-browser-router";
+import { Route, Link } from "react-router-ads";
 
 const NavItem = ({ to, icon, active, children }) => {
     const className = classNames("nav-item", { active: active });

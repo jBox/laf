@@ -6,7 +6,7 @@ import {
     StaticRouter,
     Route,
     BrowserRouter
-} from "react-browser-router";
+} from "react-router-ads";
 
 export default function createRouterComponent({
     url,

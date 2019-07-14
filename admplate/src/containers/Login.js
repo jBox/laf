@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link } from "react-browser-router";
+import { Link } from "react-router-ads";
 import isEqual from "lodash/isEqual";
 import Light from "../components/Tabs/Light";
 import Form from "../components/Form/Login";

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Switch, Route } from "react-browser-router";
+import { Switch, Route } from "react-router-ads";
 import styles from "./ExtraLayout.css";
 
 export default class ExtraLayout extends Component {

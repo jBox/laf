@@ -1,6 +1,6 @@
 import React from "react"
 import classNames from "classnames"
-import { RouterContext, matchPath } from "react-browser-router"
+import { RouterContext, matchPath } from "react-router-ads"
 
 const NavGroup = ({ id, title, icon, parent, active, children }) => {
     const className = classNames("nav-item", { "active": active });

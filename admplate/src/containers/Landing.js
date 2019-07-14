@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import isEqual from "lodash/isEqual";
-import { Redirect } from "react-browser-router";
+import { Redirect } from "react-router-ads";
 
 import landingSelector from "../redux/selectors/landing";
 import { initialLogin } from "../redux/actions/login";
