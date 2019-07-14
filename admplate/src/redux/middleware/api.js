@@ -1,7 +1,7 @@
 import { API } from "../actions/ActionTypes";
 import isObject from "lodash/isObject";
 import fetch from "chaos-fetch";
-import Jwt from "../common/Jwt";
+import Jwt from "../auth/Jwt";
 
 const isMissingContentType = (headers) => Object.keys(headers).every(x => x.toLowerCase() !== "content-type");
 

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Switch, Route } from "react-router-ads";
-import styles from "./ExtraLayout.css";
 
 export default class ExtraLayout extends Component {
     static defaultProps = {
@@ -13,12 +12,22 @@ export default class ExtraLayout extends Component {
     }
 
     componentDidMount() {
-        this.previousClassName = document.body.className;
-        document.body.className = styles.extra;
+        this.previousBodyClassName = document.body.className;
+        document.body.className = "bg-gradient-primary";
+
+        this.rootWrapper = document.getElementById("root");
+        if (this.rootWrapper) {
+            this.previousWrapperClassName = this.rootWrapper.className;
+            this.rootWrapper.className = "container";
+        }
     }
 
     componentWillUnmount() {
-        document.body.className = this.previousClassName;
+        document.body.className = this.previousBodyClassName;
+        if (this.rootWrapper) {
+            this.rootWrapper.className = this.previousWrapperClassNam;
+            this.rootWrapper = null;
+        }
     }
 
     render() {

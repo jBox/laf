@@ -1,6 +1,6 @@
 import matchRoutes from "./matchRoutes";
 
-const ROUTE_PROPS = ["path", "exact", "strict", "location", "authorize", "component", "render", "children"];
+const ROUTE_PROPS = ["path", "exact", "strict", "location", "authenticate", "component", "render", "children"];
 
 const refineRoute = (route, targets) => {
     const { routes: subRoutes } = route;

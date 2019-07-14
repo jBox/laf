@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { userHomePage } from "../common";
+import { userHomePage } from "../auth";
 
 export default createSelector(
     (state, props) => {

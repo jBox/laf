@@ -10880,19 +10880,19 @@ a:focus {
     outline: none;
 }
 
-#wrapper {
+.wrapper {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
 }
 
-#wrapper #content-wrapper {
+.wrapper #content-wrapper {
     background-color: #f8f9fc;
     width: 100%;
     overflow-x: hidden;
 }
 
-#wrapper #content-wrapper #content {
+.wrapper #content-wrapper #content {
     -webkit-box-flex: 1;
     -ms-flex: 1 0 auto;
     flex: 1 0 auto;
@@ -11960,7 +11960,7 @@ a:focus {
 }
 
 .bg-login-image {
-    background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
+    background: url("/static/sb-admin-2/img/login-bg.jpg");
     background-position: center;
     background-size: cover;
 }

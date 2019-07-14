@@ -11,7 +11,7 @@ import {
     RESET_LOGIN
 } from "./ActionTypes";
 
-import Jwt from "../common/Jwt";
+import Jwt from "../auth/Jwt";
 
 import isEmpty from "lodash/isEmpty";
 

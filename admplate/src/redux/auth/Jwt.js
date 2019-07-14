@@ -25,24 +25,26 @@ const getBaseUrl = () => {
         }
     }
 
-    return "";
+    return "/api";
 };
 
 function Jwt() {
     const baseUrl = getBaseUrl();
-    const KEY = "__JWT_";
+    const KEY = "__JWT_KEY_";
     const storage = {
         local: typeof localStorage !== "undefined" ? localStorage : new MemoryStorage(),
         session: typeof sessionStorage !== "undefined" ? sessionStorage : new MemoryStorage()
     };
 
     const getToken = () => {
-        const local = storage.local.getItem(KEY);
         const session = storage.session.getItem(KEY);
+        if (session) {
+            return JSON.parse(session);
+        }
+
+        const local = storage.local.getItem(KEY);
         if (local) {
             return { ...JSON.parse(local), rememberme: true };
-        } else if (session) {
-            return JSON.parse(session);
         }
 
         return { token: {} };
@@ -113,6 +115,4 @@ function Jwt() {
     };
 }
 
-const jwt = new Jwt();
-
-export default jwt;
+export default new Jwt();
