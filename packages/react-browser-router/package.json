@@ -22,23 +22,26 @@
     },
     "homepage": "https://github.com/jBox/react-browser-router#readme",
     "devDependencies": {
-        "babel-cli": "^6.24.1",
-        "babel-preset-env": "^1.6.1",
-        "babel-preset-react": "^6.24.1",
-        "babel-preset-stage-2": "^6.24.1",
-        "prop-types": "^15.5.8"
+        "@babel/cli": "^7.4.4",
+        "@babel/core": "^7.4.5",
+        "@babel/plugin-proposal-class-properties": "^7.4.4",
+        "@babel/preset-env": "^7.4.5",
+        "@babel/preset-react": "^7.0.0"
     },
     "dependencies": {
         "history": "^4.7.2",
-        "react": "^16.0.0",
-        "react-router": "^4.2.0",
-        "react-router-dom": "^4.2.2"
+        "prop-types": "^15.7.2",
+        "react": "^16.8.6",
+        "react-router": "^5.0.1",
+        "react-router-dom": "^5.0.1"
     },
     "babel": {
+        "plugins": [
+            "@babel/plugin-proposal-class-properties"
+        ],
         "presets": [
-            "env",
-            "stage-2",
-            "react"
+            "@babel/preset-env",
+            "@babel/preset-react"
         ]
     },
     "files": [
