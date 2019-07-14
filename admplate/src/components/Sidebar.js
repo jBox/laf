@@ -20,18 +20,23 @@ const NavDivider = ({ className }) => (
     <hr className={classNames("sidebar-divider", className)} />
 )
 
-const NavDeading = ({ children }) => (
+const NavHeading = ({ children }) => (
     <div className="sidebar-heading">{children}</div>
 )
 
-const NavGroup = ({ children }) => {
+const NavGroup = ({ id, title, icon, parent, active, children }) => {
+    const className = classNames("nav-item", { "active": active });
+    const iconClassName = classNames("fas fa-fw", "fa-" + icon);
+    const linkClassName = classNames("nav-link", { collapsed: !active });
+    const collapseClassName = classNames("collapse", { show: active });
+
     return (
-        <li className="nav-item">
-            <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                <i className="fas fa-fw fa-cog"></i>
-                <span>Components</span>
+        <li className={className}>
+            <a className={linkClassName} href="#" data-toggle="collapse" data-target={"#" + id} aria-expanded="true" aria-controls={id} >
+                <i className={iconClassName}></i>
+                <span>{title}</span>
             </a>
-            <div id={id} className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div id={id} className={collapseClassName} aria-labelledby={id} data-parent={"#" + parent}>
                 <div className="bg-white py-2 collapse-inner rounded">
                     {children}
                 </div>
@@ -40,11 +45,14 @@ const NavGroup = ({ children }) => {
     )
 }
 
-const NavGroupItem = ({ href, children }) => {
+const NavGroupItem = ({ href, active, children }) => {
     href = href || "#"
+    const className = classNames("collapse-item", { "active": active });
 
-    return (<a className="collapse-item" href={href}>{children}</a>)
+    return (<a className={className} href={href}>{children}</a>)
 }
+
+const NavGroupItemHeader = ({ children }) => (<h6 className="collapse-header">{children}</h6>)
 
 export default () => {
     return (
@@ -62,76 +70,37 @@ export default () => {
 
             <NavDivider />
 
-            <NavDeading>Interface</NavDeading>
+            <NavHeading>Interface</NavHeading>
 
-            <li className="nav-item">
-                <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i className="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
-                </a>
-                <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div className="bg-white py-2 collapse-inner rounded">
-                        <h6 className="collapse-header">Custom Components:</h6>
-                        <a className="collapse-item" href="buttons.html">Buttons</a>
-                        <a className="collapse-item" href="cards.html">Cards</a>
-                    </div>
-                </div>
-            </li>
+            <NavGroup id="collapseTwo" title="Components" icon="cog" parent="accordionSidebar">
+                <NavGroupItemHeader>Custom Components:</NavGroupItemHeader>
+                <NavGroupItem href="buttons.html">Buttons</NavGroupItem>
+                <NavGroupItem href="cards.html">Cards</NavGroupItem>
+            </NavGroup>
 
-            <li className="nav-item">
-                <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i className="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
-                </a>
-                <div id="collapseUtilities" className="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div className="bg-white py-2 collapse-inner rounded">
-                        <h6 className="collapse-header">Custom Utilities:</h6>
-                        <a className="collapse-item" href="utilities-color.html">Colors</a>
-                        <a className="collapse-item" href="utilities-border.html">Borders</a>
-                        <a className="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a className="collapse-item" href="utilities-other.html">Other</a>
-                    </div>
-                </div>
-            </li>
+            <NavGroup id="collapseUtilities" title="Utilities" icon="wrench" parent="accordionSidebar">
+                <NavGroupItemHeader>Custom Utilities:</NavGroupItemHeader>
+                <NavGroupItem href="buttons.html">Colors</NavGroupItem>
+                <NavGroupItem href="cards.html">Borders</NavGroupItem>
+                <NavGroupItem href="cards.html">Animations</NavGroupItem>
+                <NavGroupItem href="cards.html">Other</NavGroupItem>
+            </NavGroup>
 
             <NavDivider />
 
-            <div className="sidebar-heading">Addons</div>
+            <NavHeading>Addons</NavHeading>
 
-            <li className="nav-item active">
-                <a className="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                    <i className="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div id="collapsePages" className="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div className="bg-white py-2 collapse-inner rounded">
-                        <h6 className="collapse-header">Login Screens:</h6>
-                        <a className="collapse-item" href="login.html">Login</a>
-                        <a className="collapse-item" href="register.html">Register</a>
-                        <a className="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div className="collapse-divider"></div>
-                        <h6 className="collapse-header">Other Pages:</h6>
-                        <a className="collapse-item" href="404.html">404 Page</a>
-                        <a className="collapse-item active" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
-            </li>
+            <NavGroup id="collapsePages" title="Pages" icon="folder" parent="accordionSidebar" active>
+                <NavGroupItemHeader>Login Screens:</NavGroupItemHeader>
+                <NavGroupItem href="buttons.html">Login</NavGroupItem>
+                <NavGroupItem href="cards.html">Register</NavGroupItem>
+                <NavGroupItem href="cards.html">Forgot Password</NavGroupItem>
+                <NavGroupItemHeader>Other Pages:</NavGroupItemHeader>
+                <NavGroupItem href="cards.html">404 Page</NavGroupItem>
+                <NavGroupItem href="cards.html" active>Blank</NavGroupItem>
+            </NavGroup>
 
-
-            <li className="nav-item">
-                <a className="nav-link" href="charts.html">
-                    <i className="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
-            </li>
-
-
-            <li className="nav-item">
-                <a className="nav-link" href="tables.html">
-                    <i className="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-            </li>
-
-            <hr className="sidebar-divider d-none d-md-block" />
+            <NavDivider className="d-none d-md-block" />
 
             <div className="text-center d-none d-md-inline">
                 <button className="rounded-circle border-0" id="sidebarToggle"></button>

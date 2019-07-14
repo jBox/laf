@@ -4,8 +4,8 @@ import withReduxComponent from "./withReduxComponent";
 import {
     Switch,
     StaticRouter,
-    BrowserRouter,
-    Route
+    Route,
+    BrowserRouter
 } from "react-browser-router";
 
 export default function createRouterComponent({

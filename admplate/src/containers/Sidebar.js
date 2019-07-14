@@ -1,44 +1,44 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React from "react"
+import Navbar from "../components/Navbar"
 
-import Menu from "../components/Widgets/Menu";
-import Nameplate from "../components/Widgets/Nameplate";
 
-import { getUserInfo } from "../redux/actions";
-import sidebarSelector from "../redux/selectors/sidebar";
+export default () => {
 
-class Sidebar extends Component {
-    static defaultProps = {
-        navs: []
-    }
+    const target = "accordionSidebar";
 
-    static propTypes = {
-        user: PropTypes.object,
-        navs: PropTypes.array,
-        getUserInfo: PropTypes.func
-    }
+    return (
+        <Navbar id={target} title="Admplate">    
 
-    componentDidMount() {
-        const { getUserInfo } = this.props;
-        if (getUserInfo) {
-            getUserInfo();
-        }
-    }
+            <Navbar.Divider className="my-0" />
 
-    render() {
-        const { user, navs } = this.props;
-        return (
-            <aside className="main-sidebar">
-                <section className="sidebar">
-                    <Nameplate profile={user} exquisite />
-                    {navs.length > 0 && (<Menu navs={navs} />)}
-                </section>
-            </aside>
-        );
-    }
+            <Navbar.Item to="/" icon="tachometer-alt">Dashboard</Navbar.Item>
+
+            <Navbar.Divider />
+
+            <Navbar.Heading>Operation Room Manager</Navbar.Heading>
+
+            <Navbar.Group id="OperationRoom" title="Operation Room" icon="cog" parent={target}>
+                <Navbar.GroupHeader>Custom Components:</Navbar.GroupHeader>
+                <Navbar.GroupItem to="/operation-room/schedule">Schedule</Navbar.GroupItem>
+                <Navbar.GroupItem to="/operation-room/list">Operation Rooms</Navbar.GroupItem>
+            </Navbar.Group>
+
+            <Navbar.Divider />
+
+            <Navbar.Heading>Others</Navbar.Heading>
+
+            <Navbar.Group id="Others" title="Others" icon="folder" parent={target}>
+                <Navbar.GroupHeader>Login Screens:</Navbar.GroupHeader>
+                <Navbar.GroupItem to="buttons.html">Login</Navbar.GroupItem>
+                <Navbar.GroupItem to="cards.html">Register</Navbar.GroupItem>
+                <Navbar.GroupItem to="cards.html">Forgot Password</Navbar.GroupItem>
+                <Navbar.GroupHeader>Other Pages:</Navbar.GroupHeader>
+                <Navbar.GroupItem to="cards.html">404 Page</Navbar.GroupItem>
+                <Navbar.GroupItem to="cards.html">Blank</Navbar.GroupItem>
+            </Navbar.Group>
+
+            <Navbar.Divider className="d-none d-md-block" />
+
+        </Navbar>
+    );
 }
-
-export default connect(sidebarSelector, {
-    getUserInfo
-})(Sidebar);

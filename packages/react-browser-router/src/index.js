@@ -8,7 +8,8 @@ export {
     MemoryRouter,
     StaticRouter,
     withRouter,
-    matchPath
+    matchPath,
+    __RouterContext as RouterContext
 } from "react-router";
 
 export const Route = AdvancedRoute;

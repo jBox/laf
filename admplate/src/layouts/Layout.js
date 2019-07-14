@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Switch, Route } from "react-browser-router";
 import Footer from "../components/Footer"
 import Topbar from "../components/Topbar"
-import Sidebar from "../components/Sidebar"
+import Sidebar from "../containers/Sidebar"
 
 export default class Layout extends Component {
     static defaultProps = {
@@ -15,7 +15,7 @@ export default class Layout extends Component {
     }
 
     render() {
-        const { routes, ...props } = this.props;
+        const { routes } = this.props;
         return (
             <>
                 <Sidebar />

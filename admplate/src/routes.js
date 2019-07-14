@@ -14,6 +14,14 @@ const routes = [{
             exact: true,
             component: Home
         },{
+            path:"/operation-room/schedule",
+            exact: true,
+            component: Home
+        },{
+            path:"/operation-room/list",
+            exact: true,
+            component: Home
+        },{
             path:"/extra",
             exact: true,
             component: ExtraLayout

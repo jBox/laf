@@ -1,7 +1,6 @@
 import React from "react";
 import warning from "./utils/warning";
 import parseUrl from "./utils/parseUrl";
-import { matchPath } from "react-browser-router";
 import matchRoutes from "./matchRoutes";
 import createReduxStore from "./createReduxStore";
 import createRouterComponent from "./createRouterComponent";
