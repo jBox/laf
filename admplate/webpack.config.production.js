@@ -87,5 +87,9 @@ module.exports = {
         }),
 
         new ManifestPlugin()
-    ]
-};
+    ],
+
+    resolve: {
+        modules: [Path.resolve(__dirname, "../node_modules"), "node_modules"]
+    }
+}

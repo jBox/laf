@@ -2,12 +2,11 @@ const getenv = require("getenv");
 const isFunction = (fn) => typeof fn === "function";
 const isObject = (obj) => obj && typeof obj === "object";
 
-const gb = global;
-if (!gb.__jx_config_vars__) {
-    gb.__jx_config_vars__ = {};
+if (!global.__config_vars_) {
+    global.__config_vars_ = {};
 }
 
-const vars = gb.__jx_config_vars__;
+const vars = global.__config_vars_;
 
 const extendVars = (configurations) => {
     const keys = Object.keys(configurations);

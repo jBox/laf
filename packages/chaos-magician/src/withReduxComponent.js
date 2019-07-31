@@ -10,16 +10,6 @@ export default (store, monitor) => (comp) => {
             this.monitor = monitor;
         }
 
-        static childContextTypes = {
-            monitor: PropTypes.shape({
-                dispatch: PropTypes.func.isRequired
-            })
-        };
-
-        getChildContext = () => {
-            return { monitor: { dispatch: this.monitor.dispatch } };
-        }
-
         render() {
             return (
                 <Provider store={this.store}>

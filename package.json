@@ -3,10 +3,21 @@
     "private": true,
     "scripts": {
         "clean": "git clean -fdX .",
-        "start": "node ./scripts/start.js",
-        "build": "node ./scripts/build.js"
+        "start": "node server/index.js",
+        "build": "node ./scripts/build.js",
+        "bootstrap": "lerna bootstrap"
     },
     "devDependencies": {
-        "lerna": "3.15.0"
+        "lerna": "3.15.0",
+        "nodemon": "1.19.1"
+    },
+    "dependencies": {
+        "core-js": "3.1.4",
+        "lodash": "4.17.15",
+        "react": "16.8.6",
+        "react-dom": "16.8.6",
+        "react-redux": "7.1.0",
+        "redux": "4.0.4",
+        "regenerator-runtime": "0.13.2"
     }
 }

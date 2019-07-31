@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-const configuration = require("./app/configuration");
+const configuration = require("./configuration");
 const app = require("./app");
 const http = require("http");
 

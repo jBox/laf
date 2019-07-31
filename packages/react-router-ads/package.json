@@ -14,18 +14,17 @@
     "author": "jBox",
     "license": "ISC",
     "devDependencies": {
-        "@babel/cli": "^7.4.4",
-        "@babel/core": "^7.4.5",
-        "@babel/plugin-proposal-class-properties": "^7.4.4",
-        "@babel/preset-env": "^7.4.5",
-        "@babel/preset-react": "^7.0.0"
+        "@babel/cli": "7.4.4",
+        "@babel/core": "7.4.5",
+        "@babel/plugin-proposal-class-properties": "7.4.4",
+        "@babel/preset-env": "7.4.5",
+        "@babel/preset-react": "7.0.0"
     },
     "dependencies": {
-        "history": "^4.7.2",
-        "prop-types": "^15.7.2",
-        "react": "^16.8.6",
-        "react-router": "^5.0.1",
-        "react-router-dom": "^5.0.1"
+        "history": "4.7.2",
+        "prop-types": "15.7.2",
+        "react-router": "5.0.1",
+        "react-router-dom": "5.0.1"
     },
     "babel": {
         "plugins": [

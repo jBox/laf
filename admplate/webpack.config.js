@@ -3,7 +3,6 @@
 const webpack = require("webpack");
 const Path = require("path");
 
-const OpenBrowserPlugin = require("open-browser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devMode = process.env.NODE_ENV === "development";
 
@@ -86,5 +85,9 @@ module.exports = {
             $: "jquery",
             jQuery: "jquery",
         })
-    ]
-};
+    ],
+
+    resolve: {
+        modules: [Path.resolve(__dirname, "../node_modules"), "node_modules"]
+    }
+}

@@ -14,18 +14,18 @@
     "author": "jBox",
     "license": "MIT",
     "dependencies": {
-        "content-type": "^1.0.4",
-        "lodash": "^4.17.14",
-        "node-fetch": "^2.6.0",
-        "whatwg-fetch": "^3.0.0"
+        "content-type": "1.0.4",
+        "lodash": "4.17.14",
+        "node-fetch": "2.6.0",
+        "whatwg-fetch": "3.0.0"
     },
     "devDependencies": {
-        "@babel/cli": "^7.4.4",
-        "@babel/core": "^7.4.5",
-        "@babel/plugin-proposal-class-properties": "^7.4.4",
-        "@babel/preset-env": "^7.4.5",
-        "cross-env": "^4.0.0",
-        "del-cli": "^0.2.1"
+        "@babel/cli": "7.4.4",
+        "@babel/core": "7.4.5",
+        "@babel/plugin-proposal-class-properties": "7.4.4",
+        "@babel/preset-env": "7.4.5",
+        "cross-env": "4.0.0",
+        "del-cli": "2.0.0"
     },
     "files": [
         "lib"

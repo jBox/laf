@@ -4,16 +4,16 @@ const requireDefault = (obj) => obj && obj.__esModule ? obj.default : obj;
 
 const Path = require("path");
 const chaos = requireDefault(require("chaos-magician"));
-const routes = requireDefault(require("../lib/routes"));
-const middlewares = requireDefault(require("../lib/redux/middleware"));
-const reducers = requireDefault(require("../lib/redux/reducers"));
+const routes = requireDefault(require("admplate/lib/routes"));
+const middlewares = requireDefault(require("admplate/lib/redux/middleware"));
+const reducers = requireDefault(require("admplate/lib/redux/reducers"));
 
 const express = require("express");
 const router = express.Router();
 const cv = require("config-vars");
 const foundation = require("./foundation");
 
-const apiBaseUrl = "cv.env.jx.inExternalHost";
+const apiBaseUrl = "cv.env.inExternalHost";
 
 /* GET pages. */
 router.get("/:rest*?", async (req, res, next) => {

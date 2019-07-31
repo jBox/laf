@@ -1,7 +1,8 @@
 {
-  "packages": [
-    "packages/*",
-    "admplate"
-  ],
-  "version": "5.0.0"
+    "packages": [
+        "packages/*",
+        "admplate",
+        "server"
+    ],
+    "version": "5.0.0"
 }
