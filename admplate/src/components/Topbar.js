@@ -101,7 +101,7 @@ export default () => {
                                     </h6>
                         <a className="dropdown-item d-flex align-items-center" href="#">
                             <div className="dropdown-list-image mr-3">
-                                <img className="rounded-circle" src="/static/sb-admin-2/img/1.jpg" alt="" />
+                                <img className="rounded-circle" src="/public/sb-admin-2/img/1.jpg" alt="" />
                                 <div className="status-indicator bg-success"></div>
                             </div>
                             <div className="font-weight-bold">
@@ -112,7 +112,7 @@ export default () => {
                         </a>
                         <a className="dropdown-item d-flex align-items-center" href="#">
                             <div className="dropdown-list-image mr-3">
-                                <img className="rounded-circle" src="/static/sb-admin-2/img/2.jpg" alt="" />
+                                <img className="rounded-circle" src="/public/sb-admin-2/img/2.jpg" alt="" />
                                 <div className="status-indicator"></div>
                             </div>
                             <div>
@@ -122,7 +122,7 @@ export default () => {
                         </a>
                         <a className="dropdown-item d-flex align-items-center" href="#">
                             <div className="dropdown-list-image mr-3">
-                                <img className="rounded-circle" src="/static/sb-admin-2/img/3.jpg" alt="" />
+                                <img className="rounded-circle" src="/public/sb-admin-2/img/3.jpg" alt="" />
                                 <div className="status-indicator bg-warning"></div>
                             </div>
                             <div>
@@ -132,7 +132,7 @@ export default () => {
                         </a>
                         <a className="dropdown-item d-flex align-items-center" href="#">
                             <div className="dropdown-list-image mr-3">
-                                <img className="rounded-circle" src="/static/sb-admin-2/img/4.jpg" alt="" />
+                                <img className="rounded-circle" src="/public/sb-admin-2/img/4.jpg" alt="" />
                                 <div className="status-indicator bg-success"></div>
                             </div>
                             <div>
@@ -149,7 +149,7 @@ export default () => {
                 <li className="nav-item dropdown no-arrow">
                     <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span className="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                        <img className="img-profile rounded-circle" src="/static/sb-admin-2/img/1.jpg" />
+                        <img className="img-profile rounded-circle" src="/public/sb-admin-2/img/1.jpg" />
                     </a>
 
                     <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

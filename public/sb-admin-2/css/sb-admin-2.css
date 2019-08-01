@@ -11960,7 +11960,7 @@ a:focus {
 }
 
 .bg-login-image {
-    background: url("/static/sb-admin-2/img/login-bg.jpg");
+    background: url("/public/sb-admin-2/img/login-bg.jpg");
     background-position: center;
     background-size: cover;
 }
