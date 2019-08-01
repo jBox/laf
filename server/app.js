@@ -13,7 +13,7 @@ const router = require("./router");
 const app = express();
 const ROOT = Path.resolve(__dirname, "../");
 const VIEWS = Path.resolve(__dirname, "views");
-const ASSETS = Path.relative(ROOT, "admplate/static")
+const ASSETS = Path.relative(ROOT, "public")
 
 // sets react rendering engine
 app.engine("html", viewEngine);
@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // streams static files
-app.use("/static", express.static(ASSETS));
+app.use("/public", express.static(ASSETS));
 
 // setup router
 app.use(router);

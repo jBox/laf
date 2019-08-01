@@ -1,7 +1,0 @@
-.board {
-    position: fixed;
-    z-index: 99999;
-    top: 50px;
-    right: 0;
-    width: 330px;
-}

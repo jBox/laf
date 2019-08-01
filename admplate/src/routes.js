@@ -1,8 +1,8 @@
 import "./dateFormat";
-import React from "react";
 import ExtraLayout from "./layouts/ExtraLayout";
 import Layout from "./layouts/Layout";
 import Home from "./containers/Home";
+import ApplyOperation from "./containers/Operation/Apply";
 import Login from "./containers/Login";
 import { authenticate } from "./redux/auth"
 
@@ -31,7 +31,18 @@ const routes = [{
             component: Home
         },
         {
-            path: "/operation-room/list",
+            path: "/operation-room/apply",
+            exact: true,
+            component: ApplyOperation
+        },
+        {
+            path: "/operation-room/cancel",
+            exact: true,
+            authenticate: authenticate,
+            component: Home
+        },
+        {
+            path: "/operation-room/notice",
             exact: true,
             authenticate: authenticate,
             component: Home

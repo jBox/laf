@@ -12,14 +12,14 @@ module.exports = {
     entry: [
         "core-js/stable",
         "regenerator-runtime/runtime",
-        Path.resolve("src/index.js")
+        Path.resolve(__dirname, "src/index.js")
     ],
 
     devtool: "source-map",
 
     output: {
         filename: "[name].js",
-        path: Path.resolve("static/dist"),
+        path: Path.resolve(__dirname, "../public/dist"),
     },
 
     module: {
