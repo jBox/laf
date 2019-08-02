@@ -129,8 +129,8 @@ var DateTimePicker = function ($, moment) {
         disabledDates: false,
         enabledDates: false,
         icons: {
-            time: 'fa fa-clock-o',
-            date: 'fa fa-calendar',
+            time: 'far fa-clock',
+            date: 'far fa-calendar-alt',
             up: 'fa fa-arrow-up',
             down: 'fa fa-arrow-down',
             previous: 'fa fa-chevron-left',
@@ -2468,44 +2468,6 @@ var TempusDominusBootstrap4 = function ($) {
 
 
         TempusDominusBootstrap4.prototype.hide = function hide() {
-            var transitioning = false;
-            if (!this.widget) {
-                return;
-            }
-            // Ignore event if in the middle of a picker transition
-            this.widget.find('.collapse').each(function () {
-                var collapseData = $(this).data('collapse');
-                if (collapseData && collapseData.transitioning) {
-                    transitioning = true;
-                    return false;
-                }
-                return true;
-            });
-            if (transitioning) {
-                return;
-            }
-            if (this.component && this.component.hasClass('btn')) {
-                this.component.toggleClass('active');
-            }
-            this.widget.hide();
-
-            $(window).off('resize', this._place());
-            this.widget.off('click', '[data-action]');
-            this.widget.off('mousedown', false);
-
-            this.widget.remove();
-            this.widget = false;
-
-            this._notifyEvent({
-                type: DateTimePicker.Event.HIDE,
-                date: this._getLastPickedDate().clone()
-            });
-
-            if (this.input !== undefined) {
-                this.input.blur();
-            }
-
-            this._viewDate = this._getLastPickedDate().clone();
         };
 
         TempusDominusBootstrap4.prototype.show = function show() {

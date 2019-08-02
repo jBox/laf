@@ -2,11 +2,11 @@ import React from "react";
 import warning from "./utils/warning";
 import parseUrl from "./utils/parseUrl";
 import matchRoutes from "./matchRoutes";
-import createReduxStore from "./createReduxStore";
+import createReduxStore, {createReduxParallel} from "./createReduxStore";
 import createRouterComponent from "./createRouterComponent";
 import ReactDOM from "react-dom";
 import { renderToString } from "react-dom/server";
-import { createMonitor } from "redux-dispatch-monitor";
+import { createParallel } from "redux-parallel";
 
 const universe = typeof window !== "undefined" ? window : global;
 
@@ -30,8 +30,8 @@ export default (routes, rootReducer, middlewares) => {
         }
 
         const { initialState } = getInitials();
-        const monitor = createMonitor();
-        const store = createReduxStore(null, rootReducer, middlewares, monitor, initialState);
+        const parallel = createParallel();
+        const store = createReduxStore(rootReducer, initialState, middlewares, parallel);
         for (const route of routes) {
             const id = route.id;
             const element = document.getElementById(id);
@@ -41,7 +41,7 @@ export default (routes, rootReducer, middlewares) => {
                     url,
                     routes: route.routes,
                     store,
-                    monitor,
+                    parallel,
                     initialState
                 });
                 ReactDOM.hydrate(<Comp />, element);
@@ -99,20 +99,18 @@ export default (routes, rootReducer, middlewares) => {
             };
         };
 
-        const monitor = createMonitor();
-        createReduxStore(request, rootReducer, middlewares, monitor);
-        return monitor.dispatch(...initialActions).then((initialState) => {
+        const parallel = createReduxParallel(rootReducer, middlewares);
+        return parallel.dispatch(...initialActions).then((initialState) => {
             const store = createReduxStore(
-                request,
                 rootReducer,
+                { ...initialState, ...preloadedState },
                 middlewares,
-                monitor,
-                { ...initialState, ...preloadedState });
+                parallel);
             return renderComponentsToString(routes, {
                 url,
                 request,
                 routerContext,
-                monitor,
+                parallel,
                 store
             });
         });

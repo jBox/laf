@@ -1,5 +1,5 @@
-const ACTION_EXCEPTION_SYMBOL = "[SYNC_ACTION_EXCEPTION]";
-const DISPATCH_EXCEPTION_SYMBOL = "[SYNC_DISPATCH_EXCEPTION]";
+const ACTION_EXCEPTION_SYMBOL = "[PARALLEL_ACTION_EXCEPTION]";
+const DISPATCH_EXCEPTION_SYMBOL = "[PARALLEL_DISPATCH_EXCEPTION]";
 
 const isUndefined = (obj) => typeof obj === "undefined";
 const isFunction = (fn) => fn && typeof fn === "function";
@@ -14,10 +14,10 @@ if (!isFunction(console.error)) {
 }
 
 const INIT_ERROR = () => {
-    throw new Error(`Compose monitor into Redux store first. e.g. 
-const monitor = createMonitor();
-const store = createStore(reducers, compose(monitor, applyMiddleware(...middlewares)));
-monitor.dispatch(...actions).then((preloadedState) => ());`);
+    throw new Error(`Compose parallel into Redux store first. e.g. 
+const parallel = createParallel();
+const store = createStore(reducers, compose(parallel, applyMiddleware(...middlewares)));
+parallel.dispatch(...actions).then((preloadedState) => ());`);
 }
 
 const done = (getState, tasks = []) => {
@@ -28,11 +28,11 @@ const done = (getState, tasks = []) => {
     return p.then(() => getState());
 };
 
-export const createMonitor = () => {
-    const monitor = (createStore) => (...args) => {
+export const createParallel = () => {
+    const parallel = (createStore) => (...args) => {
         const store = createStore(...args);
         const { dispatch, getState } = store;
-        monitor.dispatch = (...actions) => {
+        parallel.dispatch = (...actions) => {
             const tasks = actions.reduce((res, action) => {
                 try {
                     const result = dispatch(action);
@@ -57,8 +57,8 @@ export const createMonitor = () => {
         return store;
     };
 
-    monitor.dispatch = INIT_ERROR;
-    return monitor;
+    parallel.dispatch = INIT_ERROR;
+    return parallel;
 };
 
-export default createMonitor();
+export default createParallel();

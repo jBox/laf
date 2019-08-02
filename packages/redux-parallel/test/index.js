@@ -1,7 +1,7 @@
 const thunk = require("redux-thunk").default;
 const assert = require("assert");
 const { createStore, applyMiddleware, compose } = require("redux");
-const { createMonitor } = require("../lib");
+const { createParallel } = require("../lib");
 const { createSeviceMiddleware, rootReducers } = require("./common");
 
 const serviceAction = { SERVICE: { type: "c", payload: "cc" } };
@@ -17,19 +17,19 @@ const thunkAction = (dispatch, getState) => {
 }
 
 // usage
-describe("redux-dispatch-monitor", () => {
+describe("redux-parallel", () => {
 
     const g = {};
     beforeEach(() => {
         const middlewares = [thunk.withExtraArgument(), createSeviceMiddleware()];
-        const monitor = createMonitor();
+        const monitor = createParallel();
         createStore(rootReducers, compose(monitor, applyMiddleware(...middlewares)));
         g.monitor = monitor;
     });
 
     describe("Not init", () => {
         it("throw", function () {
-            const monitor = createMonitor();
+            const monitor = createParallel();
             assert.throws(monitor.dispatch, Error);
         });
     });

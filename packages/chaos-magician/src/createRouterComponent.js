@@ -13,7 +13,7 @@ export default function createRouterComponent({
     routes,
     routerContext,
     store,
-    monitor
+    parallel
 }) {
     const { pathname, href } = url;
     routes = structureReactRoutes(pathname, routes);
@@ -22,7 +22,7 @@ export default function createRouterComponent({
         {routes.map((route, index) => (<Route key={index} {...route} />))}
     </Switch>);
 
-    const reduxComponent = withReduxComponent(store, monitor);
+    const reduxComponent = withReduxComponent(store, parallel);
 
     if (SERVER_RENDER) {
         return reduxComponent(<StaticRouter location={href} context={routerContext}>

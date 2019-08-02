@@ -15,7 +15,7 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-RUN npm run build
+RUN npm run bootstrap
 
 ENV PORT 80
 EXPOSE 80

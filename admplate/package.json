@@ -10,7 +10,8 @@
         "clean:lib": "del-cli --force lib/**",
         "clean": "npm run clean:dist && npm run clean:lib",
         "build": "npm run clean && webpack --config webpack.config.production.js && babel src -d lib",
-        "dev": "npm run clean:dist && webpack --watch",
+        "dev:dist": "npm run clean:dist && webpack --watch",
+        "dev:lib": "npm run clean:lib &&babel src -d lib --watch",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "jBox",

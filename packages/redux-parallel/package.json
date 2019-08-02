@@ -1,5 +1,5 @@
 {
-    "name": "redux-dispatch-monitor",
+    "name": "redux-parallel",
     "version": "5.0.0",
     "description": "Initialize redux state asynchronously with multiple async actions.",
     "main": "lib/index.js",
@@ -10,8 +10,7 @@
         "@babel/cli": "^7.4.4",
         "@babel/core": "^7.4.5",
         "@babel/preset-env": "^7.4.5",
-        "mocha": "3.4.2",
-        "redux-thunk": "^2.3.0"
+        "mocha": "3.4.2"
     },
     "scripts": {
         "build": "babel index.js --out-dir lib",
@@ -20,7 +19,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/jBox/redux-dispatch-monitor.git"
+        "url": "git+https://github.com/jBox/redux-parallel.git"
     },
     "keywords": [
         "initial",
@@ -31,9 +30,9 @@
     "author": "jBox",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/jBox/redux-dispatch-monitor/issues"
+        "url": "https://github.com/jBox/redux-parallel/issues"
     },
-    "homepage": "https://github.com/jBox/redux-dispatch-monitor#readme",
+    "homepage": "https://github.com/jBox/redux-parallel#readme",
     "files": [
         "lib"
     ],

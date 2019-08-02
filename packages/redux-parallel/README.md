@@ -2,12 +2,12 @@
 
 # Install
 ```js
-npm install --save redux-dispatch-monitor
+npm install --save redux-parallel
 ```
 # Usage
 ```js
 import { createStore, applyMiddleware, compose } from "redux";
-import monitor from "redux-dispatch-monitor";
+import monitor from "redux-parallel";
 import thunk from "redux-thunk";
 import customizedMiddleware from "./middlewares/customized";
 import rootReducers from "./reducers";

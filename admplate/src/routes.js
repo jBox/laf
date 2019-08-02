@@ -3,6 +3,7 @@ import ExtraLayout from "./layouts/ExtraLayout";
 import Layout from "./layouts/Layout";
 import Home from "./containers/Home";
 import ApplyOperation from "./containers/Operation/Apply";
+import ScheduleOperation from "./containers/Operation/Schedule";
 import Login from "./containers/Login";
 import { authenticate } from "./redux/auth"
 
@@ -28,7 +29,7 @@ const routes = [{
         {
             path: "/operation-room/schedule",
             exact: true,
-            component: Home
+            component: ScheduleOperation
         },
         {
             path: "/operation-room/apply",
