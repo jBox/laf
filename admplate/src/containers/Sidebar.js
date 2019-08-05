@@ -1,13 +1,15 @@
 import React from "react"
-import Navbar from "../components/Navbar/x"
+import Navbar from "../components/Navbar"
+import { connect } from "react-redux"
+import { toggle } from "../redux/actions/sidebar"
+import sidebarSelector from "../redux/selectors/sidebar"
 
-
-export default () => {
+const Sidebar = ({ minimized, handleNavbarToggle }) => {
 
     const target = "accordionSidebar";
 
     return (
-        <Navbar id={target} title="Admplate">    
+        <Navbar id={target} minimized={minimized} title="Admplate" onToggle={handleNavbarToggle}>
 
             <Navbar.Divider className="my-0" />
 
@@ -33,3 +35,7 @@ export default () => {
         </Navbar>
     );
 }
+
+export default connect(sidebarSelector, {
+    handleNavbarToggle: toggle
+})(Sidebar);

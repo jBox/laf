@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Switch, Route } from "react-router-ads";
 import Footer from "../components/Footer"
-import Topbar from "../components/Topbar"
+import Topbar from "../containers/Topbar"
 import Sidebar from "../containers/Sidebar"
 
 export default class Layout extends Component {

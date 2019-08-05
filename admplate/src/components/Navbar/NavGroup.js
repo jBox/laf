@@ -1,87 +1,44 @@
-import React, { Component } from "react"
+import React from "react"
 import classNames from "classnames"
-import { RouterContext, matchPath } from "react-router-ads"
+import NavGroupItem from "./NavGroupItem"
 
-class NavGroup extends Component {
+const NavGroupItemHeader = ({ children }) => (<h6 className="collapse-header">{children}</h6>)
 
-    constructor(props) {
-        super(props);
+export default ({ id, title, icon, active, collapsed, children, onClick }) => {
+    const className = classNames("nav-item", { "active": active });
+    const iconClassName = classNames("fas fa-fw", "fa-" + icon);
+    const linkClassName = classNames("nav-link", { collapsed: collapsed });
+    const collapseClassName = classNames("collapse", { show: !collapsed });
 
-        this.state = {
-            active: props.active
-        }
-    }
-
-    static getDerivedStateFromProps(props, state) {
-        if (props.active !== state.active) {
-            return {
-                active: props.active
-            };
-        }
-
-        return null;
-    }
-
-    handleGroupHeaderClick = (event) => {
-        event.preventDefault();
+    const handleGroupHeaderClick = (event) => {
         event.stopPropagation();
+        event.preventDefault();
 
-        this.setState({
-            active: !this.state.active
-        })
-    }
-
-    render() {
-        const { title, icon, showActiveOverlay, children } = this.props;
-        const { active } = this.state;
-
-        const className = classNames("nav-item", { "active": active });
-        const iconClassName = classNames("fas fa-fw", "fa-" + icon);
-        const linkClassName = classNames("nav-link", { collapsed: !active });
-        const collapseClassName = classNames("collapse", { show: active && showActiveOverlay });
-
-        return (
-            <li className={className}>
-                <a className={linkClassName} href="#" data-toggle="collapse" onClick={this.handleGroupHeaderClick}>
-                    <i className={iconClassName}></i>
-                    <span>{title}</span>
-                </a>
-                <div className={collapseClassName}>
-                    <div className="bg-white py-2 collapse-inner rounded">
-                        {children}
-                    </div>
-                </div>
-            </li>
-        )
-    }
-}
-
-export default ({ children, ...rest }) => {
-    const childrenPath = [];
-
-    React.Children.forEach(children, (child) => {
-        const { to } = child.props;
-        const path = typeof to === "object" ? to.pathname : to;
-        const escapedPath = path && path.replace(/([.+*?=^!:${}()[\]|/\\])/g, "\\$1");
-        if (escapedPath) {
-            childrenPath.push(escapedPath)
+        if (onClick) {
+            onClick({ id, title, active, collapsed });
         }
-    });
+    }
 
     return (
-        <RouterContext.Consumer>
-            {(context) => {
-                const currentLocation = context.location;
-                const { pathname: pathToMatch } = currentLocation;
-
-                const active = childrenPath.reduce((match, escapedPath) => {
-                    return match || !!matchPath(pathToMatch, { path: escapedPath });
-                }, false);
-
-                return (
-                    <NavGroup {...rest} active={active}>{children}</NavGroup>
-                );
-            }}
-        </RouterContext.Consumer>
-    );
-};
+        <li className={className}>
+            <a className={linkClassName} href="#" data-toggle="collapse" onClick={handleGroupHeaderClick}>
+                <i className={iconClassName}></i>
+                <span>{title}</span>
+            </a>
+            <div className={collapseClassName}>
+                <div className="bg-white py-2 collapse-inner rounded">
+                    {children.map((child, index) => {
+                        switch (child.type) {
+                            case "item":
+                                return (<NavGroupItem key={index} {...child} />);
+                            case "header":
+                                return (<NavGroupItemHeader key={index} {...child} />);
+                            default:
+                                return null;
+                        }
+                    })}
+                </div>
+            </div>
+        </li>
+    )
+}
