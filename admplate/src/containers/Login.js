@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-ads"
 
 export default () => {
     return (
@@ -27,7 +28,7 @@ export default () => {
                                                 <label className="custom-control-label" htmlFor="customCheck">Remember Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" className="btn btn-primary btn-user btn-block">Login</a>
+                                        <Link to="/" className="btn btn-primary btn-user btn-block">Login</Link>
                                     </form>
                                     <hr />
                                     <div className="text-center">

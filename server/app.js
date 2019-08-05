@@ -13,22 +13,24 @@ const router = require("./router");
 const app = express();
 const ROOT = Path.resolve(__dirname, "../");
 const VIEWS = Path.resolve(__dirname, "views");
-const ASSETS = Path.relative(ROOT, "public")
+const ASSETS = Path.relative(ROOT, "admplate/dist")
+const PUBLIC = Path.relative(ROOT, "public")
 
 // sets react rendering engine
 app.engine("html", viewEngine);
 app.set("views", VIEWS);
-app.set("manifest", Path.resolve(ASSETS, "dist/manifest.json"));
+app.set("manifest", Path.resolve(ASSETS, "manifest.json"));
 app.set("view engine", "html");
 
 // uncomment after placing your favicon in /public
-app.use(favicon(Path.resolve(ASSETS, "favicon.ico")));
+app.use(favicon(Path.resolve(PUBLIC, "favicon.ico")));
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // streams static files
-app.use("/public", express.static(ASSETS));
+app.use("/static", express.static(ASSETS));
+app.use("/public", express.static(PUBLIC));
 
 // setup router
 app.use(router);

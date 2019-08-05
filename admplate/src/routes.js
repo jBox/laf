@@ -27,23 +27,23 @@ const routes = [{
             component: Home
         },
         {
-            path: "/operation-room/schedule",
+            path: "/operation/schedule/room",
             exact: true,
             component: ScheduleOperation
         },
         {
-            path: "/operation-room/apply",
+            path: "/operation/apply/room",
             exact: true,
             component: ApplyOperation
         },
         {
-            path: "/operation-room/cancel",
+            path: "/operation/cancel/room",
             exact: true,
             authenticate: authenticate,
             component: Home
         },
         {
-            path: "/operation-room/notice",
+            path: "/operation/notice/room",
             exact: true,
             authenticate: authenticate,
             component: Home

@@ -1,28 +1,60 @@
-import React from "react"
+import React, { Component } from "react"
 import classNames from "classnames"
 import { RouterContext, matchPath } from "react-router-ads"
 
-const NavGroup = ({ id, title, icon, parent, active, children }) => {
-    const className = classNames("nav-item", { "active": active });
-    const iconClassName = classNames("fas fa-fw", "fa-" + icon);
-    const linkClassName = classNames("nav-link", { collapsed: !active });
-    const collapseClassName = classNames("collapse", { show: active });
+class NavGroup extends Component {
 
-    return (
-        <li className={className}>
-            <a className={linkClassName} href="#" data-toggle="collapse" data-target={"#" + id} aria-expanded="true" aria-controls={id} >
-                <i className={iconClassName}></i>
-                <span>{title}</span>
-            </a>
-            <div id={id} className={collapseClassName} aria-labelledby={id} data-parent={"#" + parent}>
-                <div className="bg-white py-2 collapse-inner rounded">
-                    {children}
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            active: props.active
+        }
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        if (props.active !== state.active) {
+            return {
+                active: props.active
+            };
+        }
+
+        return null;
+    }
+
+    handleGroupHeaderClick = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        this.setState({
+            active: !this.state.active
+        })
+    }
+
+    render() {
+        const { title, icon, showActiveOverlay, children } = this.props;
+        const { active } = this.state;
+
+        const className = classNames("nav-item", { "active": active });
+        const iconClassName = classNames("fas fa-fw", "fa-" + icon);
+        const linkClassName = classNames("nav-link", { collapsed: !active });
+        const collapseClassName = classNames("collapse", { show: active && showActiveOverlay });
+
+        return (
+            <li className={className}>
+                <a className={linkClassName} href="#" data-toggle="collapse" onClick={this.handleGroupHeaderClick}>
+                    <i className={iconClassName}></i>
+                    <span>{title}</span>
+                </a>
+                <div className={collapseClassName}>
+                    <div className="bg-white py-2 collapse-inner rounded">
+                        {children}
+                    </div>
                 </div>
-            </div>
-        </li>
-    )
+            </li>
+        )
+    }
 }
-
 
 export default ({ children, ...rest }) => {
     const childrenPath = [];

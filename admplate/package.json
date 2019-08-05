@@ -6,7 +6,7 @@
     "main": "lib/index.js",
     "scripts": {
         "prepublish": "npm run build",
-        "clean:dist": "del-cli --force ../public/dist/**",
+        "clean:dist": "del-cli --force dist/**",
         "clean:lib": "del-cli --force lib/**",
         "clean": "npm run clean:dist && npm run clean:lib",
         "build": "npm run clean && webpack --config webpack.config.production.js && babel src -d lib",

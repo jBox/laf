@@ -5,8 +5,8 @@
         "clean": "git clean -fdX .",
         "start": "nodemon server/index.js",
         "build": "node ./scripts/build.js",
-        "dev": "node ./scripts/dev.js dist",
-        "babel": "node ./scripts/dev.js lib",
+        "dev:dist": "node ./scripts/dev.js dist",
+        "dev:lib": "node ./scripts/dev.js lib",
         "bootstrap": "lerna bootstrap"
     },
     "devDependencies": {

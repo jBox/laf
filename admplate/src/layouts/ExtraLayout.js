@@ -25,7 +25,7 @@ export default class ExtraLayout extends Component {
     componentWillUnmount() {
         document.body.className = this.previousBodyClassName;
         if (this.rootWrapper) {
-            this.rootWrapper.className = this.previousWrapperClassNam;
+            this.rootWrapper.className = this.previousWrapperClassName;
             this.rootWrapper = null;
         }
     }
