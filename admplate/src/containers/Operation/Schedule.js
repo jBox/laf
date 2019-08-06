@@ -1,23 +1,6 @@
 import React from "react"
 import PageHeader from "../../components/PageHeader"
-import Datepicker from "../../components/Datepicker"
-
-const OperationRoom = ({ num, children }) => {
-    return (
-        <div className="card border-left-primary shadow h-100 py-2">
-            <div className="card-body">
-                <div className="row no-gutters align-items-center">
-                    <div className="col-md-4 mr-2">
-                        <div className="h1 mb-0 font-weight-bold text-gray-800">{num}</div>
-                    </div>
-                    <div className="col-auto">
-                        {children}
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
+import OperationRoom from "../../components/OperationRoom"
 
 const OperationInfo = ({ indicator, children }) => (
     <div>{indicator}: <code>{children}</code></div>
