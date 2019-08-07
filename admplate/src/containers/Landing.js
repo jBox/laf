@@ -9,15 +9,10 @@ import { initialLogin } from "../redux/actions/login";
 
 class Landing extends Component {
 
-    static propTypes = {
-        auth: PropTypes.object,
-        initialLogin: PropTypes.func
-    }
-
     static getDerivedStateFromProps = (nextProps, prevState) => {
         const { auth } = nextProps;
         if (!isEqual(auth, prevState.auth)) {
-            const state = { auth, value: 100 };
+            const state = { auth };
             if (auth.authenticated) {
                 state.returnUrl = auth.returnUrl;
             } else if (auth.landing) {
@@ -33,16 +28,14 @@ class Landing extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            auth: { ...props.auth },
-            returnUrl: props.auth.returnUrl,
-            value: 0
+            auth: { ...props.auth }
         };
     }
 
     componentDidMount() {
         const { auth } = this.props;
         if (auth.authenticated) {
-            this.setState({ value: 100, returnUrl: auth.returnUrl });
+            this.setState({ returnUrl: auth.returnUrl });
         }
 
         const { initialLogin } = this.props;
@@ -52,23 +45,21 @@ class Landing extends Component {
     }
 
     render() {
-        const { value, returnUrl } = this.state;
+        const { returnUrl } = this.state;
 
         if (returnUrl) {
             return (<Redirect to={returnUrl} />);
         }
 
         return (
-            <div className="progress progress-xxs">
-                <div className="progress-bar progress-bar-success progress-bar-striped"
-                    role="progressbar"
-                    aria-valuenow={value}
+            <div className="progress" style={{ "marginTop": "50px" }}>
+                <div className="progress-bar progress-bar-striped bg-warning" role="progressbar"
+                    style={{ "width": "100%" }}
+                    aria-valuenow="100"
                     aria-valuemin="0"
-                    aria-valuemax="100"
-                    style={{ "width": `${value}%` }}>
-                    <span className="sr-only">{value}% Complete (warning)</span>
+                    aria-valuemax="100">
                 </div>
-            </div>
+            </div >
         );
     }
 }

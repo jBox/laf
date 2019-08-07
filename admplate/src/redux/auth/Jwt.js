@@ -1,6 +1,7 @@
-import jwtDecode from "jwt-decode";
 import isObject from "lodash/isObject";
 import fetch from "chaos-fetch";
+
+const formContentType = "application/x-www-form-urlencoded";
 
 class MemoryStorage {
     constructor() {
@@ -17,7 +18,7 @@ class MemoryStorage {
     }
 }
 
-const getBaseUrl = () => {
+/*const getBaseUrl = () => {
     if (typeof document !== "undefined") {
         const item = document.querySelector(`meta[name="API_BASE_URL"]`);
         if (item && item.content) {
@@ -25,11 +26,11 @@ const getBaseUrl = () => {
         }
     }
 
-    return "/api";
-};
+    return "/";
+};*/
 
 function Jwt() {
-    const baseUrl = getBaseUrl();
+    const baseUrl = "/";
     const KEY = "__JWT_KEY_";
     const storage = {
         local: typeof localStorage !== "undefined" ? localStorage : new MemoryStorage(),
@@ -47,18 +48,13 @@ function Jwt() {
             return { ...JSON.parse(local), rememberme: true };
         }
 
-        return { token: {} };
+        return {};
     };
 
     const setToken = (token, rememberme) => {
         if (isObject(token)) {
             try {
-                const data = { token };
-                const { exp, id, nickname, roles } = jwtDecode(token.access_token) || {};
-                data.expiresAt = exp;
-                data.user = { id, nickname, roles };
-
-                const str = JSON.stringify(data);
+                const str = JSON.stringify(token);
                 if (rememberme) {
                     storage.local.setItem(KEY, str)
                 } else {
@@ -70,48 +66,74 @@ function Jwt() {
         }
     };
 
-    this.save = (token, rememberme) => setToken(token, rememberme);
-
-    this.verify = () => {
-        const now = Date.now() / 1000;
-        const { expiresAt, token } = getToken();
-        if (expiresAt > now) {
-            return token;
-        }
-
-        return null;
+    const clearToken = () => {
+        storage.local.removeItem(KEY);
+        storage.session.removeItem(KEY);
+        return true;
     };
 
-    this.user = () => {
-        const { user } = getToken();
-        return user;
-    };
-
-    this.refresh = () => {
-        const { token: { refresh_token }, rememberme } = getToken();
-        if (!refresh_token) {
-            return Promise.reject("Refresh tokon error");
-        }
-
-        const url = `${baseUrl}/oauth/refresh`;
+    this.authenticate = (username, password, rememberme) => {
+        const url = `${baseUrl}/oauth/token`;
         const request = {
             method: "POST",
-            body: { token: refresh_token },
-            headers: { "Content-Type": "application/json" }
+            body: { username, password },
+            headers: { "Content-Type": formContentType }
         };
         return fetch(url, request).then((res) => {
             setToken(res.data, rememberme);
-            const { token } = getToken();
-            return token;
+            return { ...res.data, rememberme };
         }).catch((error) => {
             const interError = error.error || error;
             return Promise.reject(interError.message);
         });
     };
 
-    this.clear = () => {
-        storage.local.removeItem(KEY);
-        storage.session.removeItem(KEY);
+    this.verify = () => {
+        const now = Date.now() / 1000;
+        const token = getToken();
+        if (token.expires_at > now) {
+            return token;
+        }
+
+        return null;
+    };
+
+    this.refresh = () => {
+        const { refresh_token, rememberme } = getToken();
+        if (!refresh_token) {
+            return Promise.reject("Refresh tokon failed.");
+        }
+
+        const url = `${baseUrl}/oauth/refresh`;
+        const request = {
+            method: "POST",
+            body: { token: refresh_token },
+            headers: { "Content-Type": formContentType }
+        };
+        return fetch(url, request).then((res) => {
+            setToken(res.data, rememberme);
+            return { ...res.data, rememberme };
+        }).catch((error) => {
+            const interError = error.error || error;
+            return Promise.reject(interError.message);
+        });
+    };
+
+    this.revoke = () => {
+        const { refresh_token } = getToken();
+        if (refresh_token) {
+            const url = `${baseUrl}/oauth/revoke`;
+            const request = {
+                method: "POST",
+                body: { token: refresh_token },
+                headers: { "Content-Type": formContentType }
+            };
+            return fetch(url, request).then((res) => {
+                return clearToken();
+            }).catch(() => {
+                return Promise.resolve(clearToken());
+            });
+        }
     };
 }
 

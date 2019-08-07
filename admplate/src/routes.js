@@ -5,17 +5,23 @@ import Home from "./containers/Home";
 import ApplyOperation from "./containers/Operation/Apply";
 import ScheduleOperation from "./containers/Operation/Schedule";
 import Login from "./containers/Login";
+import Landing from "./containers/Landing";
 import { authenticate } from "./redux/auth"
 
 const routes = [{
     id: "root",
     routes: [{
-        path: "/login",
+        path: "/(login|landing)",
         component: ExtraLayout,
         routes: [{
             path: "/login",
             exact: true,
             component: Login
+        },
+        {
+            path: "/landing",
+            exact: true,
+            component: Landing
         }]
     },
     {

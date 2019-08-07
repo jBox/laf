@@ -1,4 +1,18 @@
 import Jwt from "./Jwt";
+import qs from "qs";
+
+export const getReturnUrl = (location) => {
+    if (location && location.search) {
+        const query = qs.parse(location.search.substr(1));
+        for (const key of Object.keys(query)) {
+            if (/^returnUrl$/ig.test(key)) {
+                return decodeURIComponent(query[key] || "/");
+            }
+        }
+    }
+
+    return "/";
+};
 
 export const authenticate = () => {
     const token = Jwt.verify();
@@ -6,19 +20,5 @@ export const authenticate = () => {
         return { success: true };
     }
 
-    return { redirect: "/login?returnUrl={0}" };
-};
-
-export const adminAuth = () => {
-    const auth = authenticate();
-    if (auth.success) {
-        const user = Jwt.user();
-        if (user.roles.includes("admin") || user.roles.includes("super")) {
-            return { success: true };
-        }
-
-        return { redirect: "/access/denied" };
-    }
-
-    return auth;
+    return { redirect: "/landing?returnUrl={0}" };
 };
