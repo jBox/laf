@@ -1,6 +1,7 @@
 "use strict";
 
 const express = require("express");
+const jwt = require("express-jwt");
 const Path = require("path");
 const favicon = require("serve-favicon");
 const logger = require("morgan");
@@ -9,6 +10,7 @@ const cv = require("config-vars");
 
 const viewEngine = require("./engines/html");
 const router = require("./router");
+const oauth = require("./oauth");
 
 const app = express();
 const ROOT = Path.resolve(__dirname, "../");
@@ -33,6 +35,12 @@ app.use("/static", express.static(ASSETS));
 app.use("/public", express.static(PUBLIC));
 
 // setup router
+app.use("/oauth", oauth);
+app.use(jwt({
+    secret: cv.env.secret,
+    credentialsRequired: false,
+    isRevoked: (req, payload, done) => done(null, false)
+}));
 app.use(router);
 
 // catch 404 and forward to error handler

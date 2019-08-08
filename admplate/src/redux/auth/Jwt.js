@@ -1,5 +1,6 @@
 import isObject from "lodash/isObject";
 import fetch from "chaos-fetch";
+import jwtDecode from "jwt-decode";
 
 const formContentType = "application/x-www-form-urlencoded";
 
@@ -54,7 +55,8 @@ function Jwt() {
     const setToken = (token, rememberme) => {
         if (isObject(token)) {
             try {
-                const str = JSON.stringify(token);
+                const { exp } = jwtDecode(token.access_token) || {};
+                const str = JSON.stringify({ ...token, expires_at: exp * 1000 });
                 if (rememberme) {
                     storage.local.setItem(KEY, str)
                 } else {
@@ -73,7 +75,7 @@ function Jwt() {
     };
 
     this.authenticate = (username, password, rememberme) => {
-        const url = `${baseUrl}/oauth/token`;
+        const url = `${baseUrl}oauth/token`;
         const request = {
             method: "POST",
             body: { username, password },
@@ -89,9 +91,8 @@ function Jwt() {
     };
 
     this.verify = () => {
-        const now = Date.now() / 1000;
         const token = getToken();
-        if (token.expires_at > now) {
+        if (token.expires_at > Date.now()) {
             return token;
         }
 
@@ -104,7 +105,7 @@ function Jwt() {
             return Promise.reject("Refresh tokon failed.");
         }
 
-        const url = `${baseUrl}/oauth/refresh`;
+        const url = `${baseUrl}oauth/refresh`;
         const request = {
             method: "POST",
             body: { token: refresh_token },
@@ -122,7 +123,7 @@ function Jwt() {
     this.revoke = () => {
         const { refresh_token } = getToken();
         if (refresh_token) {
-            const url = `${baseUrl}/oauth/revoke`;
+            const url = `${baseUrl}oauth/revoke`;
             const request = {
                 method: "POST",
                 body: { token: refresh_token },

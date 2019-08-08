@@ -1,14 +1,40 @@
 import React, { Component } from "react";
-import { Link } from "react-router-ads"
-import LoginForm from "../components/LoginForm"
+import { Link } from "react-router-ads";
+import LoginForm from "../components/LoginForm";
+import { connect } from "react-redux";
+import isEqual from "lodash/isEqual";
+
+import loginSelector from "../redux/selectors/login";
+import { login, initialLogin } from "../redux/actions/login";
 
 class Login extends Component {
     constructor(props) {
         super(props);
     }
 
+    componentDidMount() {
+        const { auth, history } = this.props;
+        if (auth.authenticated && history) {
+            return history.replace(auth.returnUrl);
+        }
+
+        const { initialLogin } = this.props;
+        if (initialLogin) {
+            initialLogin();
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { auth, history } = nextProps;
+        if (!isEqual(auth, this.props.auth) && auth.authenticated) {
+            history.replace(auth.returnUrl);
+        }
+    }
+
     login = (form) => {
-        console.log(form)
+        if (this.props.login) {
+            this.props.login(form);
+        }
     }
 
     render() {
@@ -43,4 +69,7 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default connect(loginSelector, {
+    login,
+    initialLogin
+})(Login);

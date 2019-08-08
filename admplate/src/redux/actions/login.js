@@ -32,7 +32,7 @@ export const initialLogin = (isLanding) => (dispatch) => {
     }
 };
 
-export const login = (username, password, rememberme) => async (dispatch) => {
+export const login = ({ username, password, rememberme }) => async (dispatch) => {
     dispatch({ type: LOGIN_REQUEST });
     try {
         const token = await Jwt.authenticate(username, password, rememberme);
