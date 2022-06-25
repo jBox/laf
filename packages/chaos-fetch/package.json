@@ -16,7 +16,7 @@
     "dependencies": {
         "content-type": "1.0.4",
         "lodash": "4.17.14",
-        "node-fetch": "2.6.0",
+        "node-fetch": "2.6.7",
         "whatwg-fetch": "3.0.0"
     },
     "devDependencies": {
